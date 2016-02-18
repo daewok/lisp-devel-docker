@@ -1,0 +1,20 @@
+#! /bin/bash
+
+set -e
+
+if [ -z "${ECL_VERSION}" ]; then
+    exit 0
+fi
+
+_URL=https://common-lisp.net/project/ecl/files/ecl-${ECL_VERSION}.tgz
+
+cd /usr/local/src/
+
+curl "${_URL}" | tar xzf -
+
+cd /usr/local/src/ecl-${ECL_VERSION}
+
+./configure --prefix=/usr/local
+make -j2
+make install
+make clean

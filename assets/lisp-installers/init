@@ -1,0 +1,9 @@
+#! /bin/bash
+
+set -e
+
+# Install build-time dependencies
+
+apt-get update
+apt-get install --no-install-recommends -y curl time libz-dev openjdk-7-jdk m4 sbcl ant ca-certificates file
+apt-get clean

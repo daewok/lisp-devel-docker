@@ -1,0 +1,21 @@
+#! /bin/bash
+
+set -e
+
+if [ -z "${ABCL_VERSION}" ]; then
+    exit 0
+fi
+
+_URL=http://abcl.org/releases/${ABCL_VERSION}/abcl-src-${ABCL_VERSION}.tar.gz
+
+cd /usr/local/src/
+
+curl "${_URL}" | tar xzf -
+
+cd /usr/local/src/abcl-src-${ABCL_VERSION}
+ant
+
+ln -s /usr/local/src/abcl-src-${ABCL_VERSION}/abcl /usr/local/bin/abcl
+
+# Cleanup build objects
+rm -rf /usr/local/src/abcl-src-${ABCL_VERSION}/build

@@ -1,0 +1,29 @@
+#! /bin/sh
+
+set -e
+
+# this script installs a fresh version of quicklisp to /usr/local
+
+gpg --verify /usr/local/src/quicklisp/quicklisp.lisp.asc /usr/local/src/quicklisp/quicklisp.lisp
+
+sbcl --no-sysinit --no-userinit --non-interactive \
+     --load /usr/local/src/quicklisp/quicklisp.lisp \
+     --eval "(quicklisp-quickstart:install :path \"/usr/local/share/common-lisp/quicklisp/\")"\
+     --eval "(ql::without-prompting (dolist (imp '(:sbcl :ccl :abcl :ecl)) (ql:add-to-init-file imp)))"
+
+# Move quicklisp to site inits where possible.
+
+cat /root/.sbclrc >> /etc/sbclrc
+cp /root/.sbclrc /home/lisp
+cp /root/.sbclrc /etc/skel
+
+cp /root/.abclrc /home/lisp
+cp /root/.abclrc /etc/skel
+
+cp /root/.eclrc /home/lisp
+cp /root/.eclrc /etc/skel
+
+cp /root/.ccl-init.lisp /home/lisp
+cp /root/.ccl-init.lisp /etc/skel
+
+chown -R lisp:lisp /home/lisp
