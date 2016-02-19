@@ -78,6 +78,8 @@ RUN chmod +x /tmp/install-quicklisp \
     && echo "here 1" \
     && umask 002 \
     && echo "here 2" \
+    && sync \
+    && sleep 2s \
     && /tmp/install-quicklisp \
     && echo "here 3" \
     && rm /tmp/install-quicklisp \
