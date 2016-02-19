@@ -75,21 +75,14 @@ ADD https://beta.quicklisp.org/quicklisp.lisp.asc /usr/local/src/quicklisp/quick
 COPY assets/install-quicklisp /tmp/install-quicklisp
 
 RUN chmod +x /tmp/install-quicklisp \
-    && echo "here 1" \
     && umask 002 \
-    && echo "here 2" \
     && sync \
     && sleep 2s \
     && /tmp/install-quicklisp \
-    && echo "here 3" \
     && rm /tmp/install-quicklisp \
-    && echo "here 4" \
     && chown -R root:lisp /usr/local/share/common-lisp/quicklisp \
-    && echo "here 5" \
     && find /usr/local/share/common-lisp/quicklisp -type d -exec chmod 1777 {} \; -exec chmod g+s {} \; \
-    && echo "here 6" \
     && rm -rf /var/cache/common-lisp/* \
-    && echo "here 7" \
     && rm -rf /usr/local/share/common-lisp/quicklisp/tmp/*
 
 USER lisp
