@@ -72,7 +72,7 @@ RUN gpg --import /root/quicklisp-release-key.txt
 ADD https://beta.quicklisp.org/quicklisp.lisp /usr/local/src/quicklisp/quicklisp.lisp
 ADD https://beta.quicklisp.org/quicklisp.lisp.asc /usr/local/src/quicklisp/quicklisp.lisp.asc
 
-COPY assets/install-quicklisp /tmp
+COPY assets/install-quicklisp /tmp/install-quicklisp
 
 RUN chmod +x /tmp/install-quicklisp \
     && umask 002 \
