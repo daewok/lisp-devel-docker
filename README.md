@@ -110,3 +110,23 @@ and start playing with Quicklisp!
   Quicklisp explicitly or create a new user (the init files are placed in
   `/etc/skel` so new users will have them by default). Additionally, make sure
   the new user is in the `lisp` group (to access the Quicklisp folder).
+
++ SBCL does its best to turn off Address Space Layout Randomization (ASLR) when
+  it starts. However, Docker's default security profile (if seccomp is compiled
+  in) prevents SBCL from doing this. If you are afraid this might be an issue (I
+  haven't personally seen an issue yet, but it was definitely done for a reason)
+  or you're just tired of seeing:
+
+> WARNING:
+>
+> Couldn't re-execute SBCL with proper personality flags (/proc isn't mounted? setuid?)
+>
+> Trying to continue anyway.
+
+  whenever you start SBCL, you can either use a more lax seccomp profile by
+  adding `--security-opt=seccomp=/path/to/docker-sbcl-seccomp.json` to the run
+  command (docker-sbcl-seccomp.json is found in the project's git repo). Or you
+  can disable seccomp altogether (not recommended!) by adding
+  `--security-opt=seccomp=unconfined`. I will make a good faith effort to keep
+  `docker-sbcl-seccomp.json` up to date with Docker's defaults, but no
+  guarantees are provided!
