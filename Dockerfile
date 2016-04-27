@@ -34,14 +34,12 @@ RUN chmod +x /tmp/lisp-installers/* \
 RUN mkdir -p /etc/common-lisp/asdf-output-translations.conf.d \
     && mkdir -p /etc/common-lisp/source-registry.conf.d \
     && mkdir -p /var/cache/common-lisp \
-    && chmod 1777 /var/cache/common-lisp \
+    && chmod 777 /var/cache/common-lisp \
     && mkdir -p /usr/local/share/common-lisp/slime \
     && mkdir -p /usr/local/share/common-lisp/source \
-    && chmod 1777 /usr/local/share/common-lisp/source
+    && chmod 777 /usr/local/share/common-lisp/source
 
 COPY assets/asdf/50-default-translations.conf /etc/common-lisp/asdf-output-translations.conf.d/
 COPY assets/asdf/50-slime.conf /etc/common-lisp/source-registry.conf.d/
-
-VOLUME ["/usr/local/share/common-lisp/slime"]
 
 USER lisp
