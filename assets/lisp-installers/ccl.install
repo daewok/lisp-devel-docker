@@ -21,4 +21,4 @@ ln -s /usr/local/src/ccl/scripts/ccl /usr/local/bin/ccl32
 
 # Cleanup the subversion folders that are for some reason included in the
 # tarball.
-find /usr/local/src/ccl/ -type d -name .svn -exec rm {} -rf \;
+find /usr/local/src/ccl/ -type d -name .svn -print0 | xargs -0 rm -rf
