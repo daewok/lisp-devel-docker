@@ -6,7 +6,7 @@ if [ -z "${ECL_VERSION}" ]; then
     exit 0
 fi
 
-_URL=https://common-lisp.net/project/ecl/files/ecl-${ECL_VERSION}.tgz
+_URL=https://common-lisp.net/project/ecl/static/files/release/ecl-${ECL_VERSION}.tgz
 
 cd /usr/local/src/
 
