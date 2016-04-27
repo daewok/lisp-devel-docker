@@ -81,7 +81,7 @@ RUN chmod +x /tmp/install-quicklisp \
     && /tmp/install-quicklisp \
     && rm /tmp/install-quicklisp \
     && chown -R root:lisp /usr/local/share/common-lisp/quicklisp \
-    && find /usr/local/share/common-lisp/quicklisp -type d -exec chmod 1777 {} \; -exec chmod g+s {} \; \
+    && find /usr/local/share/common-lisp/quicklisp -type d -exec chmod 777 {} \; -exec chmod g+s {} \; \
     && rm -rf /var/cache/common-lisp/* \
     && rm -rf /usr/local/share/common-lisp/quicklisp/tmp/*
 
