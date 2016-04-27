@@ -23,7 +23,10 @@ RUN chmod +x /tmp/lisp-installers/* \
     && sync \
     && sleep 2 \
     && /tmp/lisp-installers/init \
-    && find /tmp/lisp-installers -name "*.install" -exec {} \; \
+    && /tmp/lisp-installers/sbcl.install \
+    && /tmp/lisp-installers/abcl.install \
+    && /tmp/lisp-installers/ccl.install \
+    && /tmp/lisp-installers/ecl.install \
     && /tmp/lisp-installers/clean \
     && rm -rf /tmp/lisp-installers
 
