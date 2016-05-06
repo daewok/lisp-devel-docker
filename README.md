@@ -1,12 +1,10 @@
 # Common Lisp Docker Images for Development #
 
-Homepage: [https://people.csail.mit.edu/etimmons/software/lisp-devel-docker.html](https://people.csail.mit.edu/etimmons/software/lisp-devel-docker.html)
-
 Github: [https://github.com/daewok/lisp-devel-docker](https://github.com/daewok/lisp-devel-docker)
 
 Docker Hub: [https://hub.docker.com/r/daewok/lisp-devel/](https://hub.docker.com/r/daewok/lisp-devel/)
 
-See also: [slime-docker](https://people.csail.mit.edu/etimmons/software/slime-docker.html)
+See also: [slime-docker](https://github.com/daewok/slime-docker)
 
 ### About ###
 
@@ -97,7 +95,7 @@ and start playing with Quicklisp!
 ### Notes and Gotchas ###
 
 + Lisp is more fun when you're using Emacs and Slime to interact with it! See
-  [slime-docker](https://people.csail.mit.edu/etimmons/software/slime-docker.html)
+  [slime-docker](https://github.com/daewok/slime-docker)
   for information on a library that makes setting that up easy!
 
 + Please [open an issue](https://github.com/daewok/lisp-devel-docker/issues) if
