@@ -1,6 +1,6 @@
 #! /bin/bash
 
-set -e
+set -ex
 
 echo "Starting cleanup"
 
@@ -8,6 +8,3 @@ echo "Starting cleanup"
 apt-get remove --purge -y openjdk-7-jdk time curl libz-dev m4 sbcl ant file
 apt-get autoremove -y
 rm -rf /var/lib/apt
-
-
-

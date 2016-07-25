@@ -1,10 +1,5 @@
 FROM daewok/lisp-devel:base
-
 MAINTAINER etimmons@mit.edu
-
-# Install Quicklisp
-
-USER root
 
 RUN echo "deb http://httpredir.debian.org/debian jessie-backports main" >> /etc/apt/sources.list \
     && apt-get update \
@@ -66,23 +61,17 @@ RUN echo "deb http://httpredir.debian.org/debian jessie-backports main" >> /etc/
     && ln -s /usr/lib/x86_64-linux-gnu/libdl.so /usr/lib \
     && ln -s /usr/lib/x86_64-linux-gnu/libglib-2.0.so /usr/lib
 
-ADD https://beta.quicklisp.org/release-key.txt /root/quicklisp-release-key.txt
-RUN gpg --import /root/quicklisp-release-key.txt
-
-ADD https://beta.quicklisp.org/quicklisp.lisp /usr/local/src/quicklisp/quicklisp.lisp
-ADD https://beta.quicklisp.org/quicklisp.lisp.asc /usr/local/src/quicklisp/quicklisp.lisp.asc
-
-COPY assets/install-quicklisp /tmp/install-quicklisp
-
-RUN chmod +x /tmp/install-quicklisp \
-    && umask 002 \
-    && sync \
-    && sleep 2s \
-    && /tmp/install-quicklisp \
-    && rm /tmp/install-quicklisp \
-    && chown -R root:lisp /usr/local/share/common-lisp/quicklisp \
-    && find /usr/local/share/common-lisp/quicklisp -type d -exec chmod 777 {} \; -exec chmod g+s {} \; \
-    && rm -rf /var/cache/common-lisp/* \
-    && rm -rf /usr/local/share/common-lisp/quicklisp/tmp/*
-
-USER lisp
+RUN set -x \
+    && apt-get update && apt-get install -y --no-install-recommends curl && rm -rf /var/lib/apt \
+    && curl "https://beta.quicklisp.org/release-key.txt" > /tmp/quicklisp-release-key.txt \
+    && curl "https://beta.quicklisp.org/quicklisp.lisp" > /tmp/quicklisp.lisp \
+    && curl "https://beta.quicklisp.org/quicklisp.lisp.asc" > /tmp/quicklisp.lisp.asc \
+    && export GNUPGHOME="$(mktemp -d)" \
+    && gpg --import /tmp/quicklisp-release-key.txt \
+    && gpg --verify /tmp/quicklisp.lisp.asc /tmp/quicklisp.lisp \
+    && rm -r "$GNUPGHOME" /tmp/quicklisp.lisp.asc \
+    && export HOME=/home/lisp \
+    && sbcl --no-sysinit --no-userinit --non-interactive \
+            --load /tmp/quicklisp.lisp \
+            --eval "(quicklisp-quickstart:install)" \
+            --eval "(ql::without-prompting (dolist (imp '(:sbcl :ccl :abcl :ecl)) (ql:add-to-init-file imp)))"

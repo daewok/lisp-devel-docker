@@ -4,16 +4,23 @@ MAINTAINER etimmons@mit.edu
 
 ENV LANG=C.UTF-8
 
-# Install tools that will be needed even after build time.
-RUN apt-get update \
-    && apt-get install --no-install-recommends -y \
-    # Needed by ECL to compile lisp files and used by CFFI (used commonly enough
-    # that it should stay)
-    build-essential \
-    openjdk-7-jre-headless \
-    && apt-get clean \
-    && rm -rf /var/lib/apt \
-    && adduser --gecos "Lisp User" --disabled-password lisp
+ENV GOSU_VERSION 1.9
+RUN set -x \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends ca-certificates wget \
+       build-essential \
+       openjdk-7-jre-headless \
+    && rm -rf /var/lib/apt/lists/* \
+    && dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" \
+    && wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch" \
+    && wget -O /usr/local/bin/gosu.asc "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch.asc" \
+    && export GNUPGHOME="$(mktemp -d)" \
+    && gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4 \
+    && gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu \
+    && rm -r "$GNUPGHOME" /usr/local/bin/gosu.asc \
+    && chmod +x /usr/local/bin/gosu \
+    && apt-get purge -y --auto-remove wget \
+    && cp -a /etc/skel /home/lisp
 
 COPY assets/lisp-installers /tmp/lisp-installers
 
@@ -33,13 +40,11 @@ RUN chmod +x /tmp/lisp-installers/* \
 # Set up folders and volumes.
 RUN mkdir -p /etc/common-lisp/asdf-output-translations.conf.d \
     && mkdir -p /etc/common-lisp/source-registry.conf.d \
-    && mkdir -p /var/cache/common-lisp \
-    && chmod 777 /var/cache/common-lisp \
     && mkdir -p /usr/local/share/common-lisp/slime \
     && mkdir -p /usr/local/share/common-lisp/source \
     && chmod 777 /usr/local/share/common-lisp/source
 
-COPY assets/asdf/50-default-translations.conf /etc/common-lisp/asdf-output-translations.conf.d/
 COPY assets/asdf/50-slime.conf /etc/common-lisp/source-registry.conf.d/
+COPY assets/entrypoint.sh /usr/local/bin/daewok_lisp-docker_entrypoint.sh
 
-USER lisp
+ENTRYPOINT ["/usr/local/bin/daewok_lisp-docker_entrypoint.sh"]

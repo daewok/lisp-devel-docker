@@ -41,9 +41,9 @@ needed to run four Common Lisp implementations:
 + ECL
 + ABCL
 
-Additionally, a Linux user (and group) is created with UID 1000 and name
-`lisp`. It is recommended that you use this user when running one of these
-images.
+Additionally, a Linux user (and group) is created with UID 1000/GID 1000 and
+name `lisp`. This user exists for those that do not want to use the default user
+(root).
 
 ##### ASDF Integration #####
 

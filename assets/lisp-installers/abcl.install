@@ -1,6 +1,6 @@
 #! /bin/bash
 
-set -e
+set -ex
 
 if [ -z "${ABCL_VERSION}" ]; then
     exit 0

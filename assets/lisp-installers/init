@@ -1,6 +1,6 @@
 #! /bin/bash
 
-set -e
+set -ex
 
 # Install build-time dependencies
 

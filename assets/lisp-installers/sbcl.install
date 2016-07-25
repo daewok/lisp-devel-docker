@@ -1,6 +1,6 @@
 #! /bin/bash
 
-set -e
+set -ex
 
 if [ -z "${SBCL_VERSION}" ]; then
     exit 0
@@ -8,12 +8,12 @@ fi
 
 WORKDIR=/usr/local/src
 
-_URL=http://iweb.dl.sourceforge.net/project/sbcl/sbcl/${SBCL_VERSION}/sbcl-${SBCL_VERSION}-source.tar.bz2
+_URL=https://downloads.sourceforge.net/project/sbcl/sbcl/${SBCL_VERSION}/sbcl-${SBCL_VERSION}-source.tar.bz2
 
 mkdir -p ${WORKDIR}
 cd ${WORKDIR}
 
-curl "${_URL}" | tar xjf -
+curl -L "${_URL}" | tar xjf -
 
 cd ${WORKDIR}/sbcl-${SBCL_VERSION}
 sh make.sh --prefix=/usr/local --fancy
