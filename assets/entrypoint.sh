@@ -6,7 +6,6 @@
 # through one environment variable:
 #
 # LISP_DEVEL_UID: Defaults to 0. This is the UID and GID of the lisp user.
-set -e
 
 _UID="${LISP_DEVEL_UID:-0}"
 
