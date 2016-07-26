@@ -41,23 +41,15 @@ needed to run four Common Lisp implementations:
 + ECL
 + ABCL
 
-Additionally, a Linux user (and group) is created with UID 1000/GID 1000 and
-name `lisp`. This user exists for those that do not want to use the default user
-(root).
+The entrypoint to the image is configured to automatically create and switch to
+a user named `lisp` when executing commands. The UID of the Lisp user is
+configured by the environment variable `LISP_DEVEL_UID`. It defaults to 0, but
+most people will probably want to set this to 1000 (or whatever their UID on
+their host machine is).
 
 ##### ASDF Integration #####
 
-ASDF user translations have been modified to not use the user's home
-directory. This is primarily in case you decide to run the image as a user that
-does not exist in the image (e.g., your UID on your machine is 1002 and you want
-to make sure that mounted folders are writeable by the container user). Instead,
-ASDF uses
-`/var/cache/common-lisp/${ASDF_DOCKER_OUTPUT_SUBDIR}/${IMPLEMENTATION}/` for its
-build cache. The implementation is auto detected, but the subdir can be
-controlled by the user by specifying `ASDF_DOCKER_OUTPUT_SUBDIR` as an
-environment variable when running the image.
-
-Additionally, `/usr/local/share/common-lisp/slime/` is added to ASDF's source
+`/usr/local/share/common-lisp/slime/` is added to ASDF's source
 registry, to allow for easy mounting of Slime/Swank
 
 ##### Usage #####
@@ -82,8 +74,7 @@ with. The `ql` and `latest` tags point to an image that has
 libraries necessary to compile every library currently in Quicklisp. As such, it
 is much larger than the base image.
 
-Quicklisp is installed to the path `/usr/local/share/common-lisp/quicklisp`
-which is owned by `lisp:lisp`.
+Quicklisp is installed to the path `/home/lisp/quicklisp`.
 
 This image behaves exactly the same as the base image, except that it loads
 Quicklisp on start, so simply run:
@@ -102,17 +93,10 @@ and start playing with Quicklisp!
   you find a package in Quicklisp that is missing a dependency in the `ql`
   image.
 
-+ If you do not use the `lisp` or `root` users when using the Quicklisp image,
-  you will have issues with Quicklisp being loaded because other users do not
-  have init files that load Quicklisp's `setup.lisp`. You will need to either
-  Quicklisp explicitly or create a new user (the init files are placed in
-  `/etc/skel` so new users will have them by default). Additionally, make sure
-  the new user is in the `lisp` group (to access the Quicklisp folder).
-
 + SBCL does its best to turn off Address Space Layout Randomization (ASLR) when
   it starts. However, Docker's default security profile (if seccomp is compiled
   in) prevents SBCL from doing this. If you are afraid this might be an issue (I
-  haven't personally seen an issue yet, but it was definitely done for a reason)
+  haven't personally seen an issue yet, but it was presumably done for a reason)
   or you're just tired of seeing:
 
 > WARNING:
