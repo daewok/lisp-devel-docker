@@ -74,4 +74,5 @@ RUN set -x \
     && sbcl --no-sysinit --no-userinit --non-interactive \
             --load /tmp/quicklisp.lisp \
             --eval "(quicklisp-quickstart:install)" \
-            --eval "(ql::without-prompting (dolist (imp '(:sbcl :ccl :abcl :ecl)) (ql:add-to-init-file imp)))"
+            --eval "(ql::without-prompting (dolist (imp '(:sbcl :ccl :abcl :ecl)) (ql:add-to-init-file imp)))" \
+    && rm /tmp/quicklisp.lisp
