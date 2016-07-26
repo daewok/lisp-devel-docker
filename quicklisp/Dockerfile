@@ -75,4 +75,4 @@ RUN set -x \
             --load /tmp/quicklisp.lisp \
             --eval "(quicklisp-quickstart:install)" \
             --eval "(ql::without-prompting (dolist (imp '(:sbcl :ccl :abcl :ecl)) (ql:add-to-init-file imp)))" \
-    && rm /tmp/quicklisp.lisp
+    && rm -rf /tmp/*

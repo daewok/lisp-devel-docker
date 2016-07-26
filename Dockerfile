@@ -35,7 +35,7 @@ RUN chmod +x /tmp/lisp-installers/* \
     && /tmp/lisp-installers/ccl.install \
     && /tmp/lisp-installers/ecl.install \
     && /tmp/lisp-installers/clean \
-    && rm -rf /tmp/lisp-installers
+    && rm -rf /tmp/*
 
 # Set up folders and volumes.
 RUN mkdir -p /etc/common-lisp/asdf-output-translations.conf.d \
