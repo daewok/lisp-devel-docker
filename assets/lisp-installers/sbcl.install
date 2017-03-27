@@ -16,6 +16,9 @@ cd ${WORKDIR}
 curl -L "${_URL}" | tar xjf -
 
 cd ${WORKDIR}/sbcl-${SBCL_VERSION}
+
+patch -p1 < /tmp/lisp-installers/patches/concurrency-test-1.3.15.patch
+
 sh make.sh --prefix=/usr/local --fancy
 sh install.sh
 
