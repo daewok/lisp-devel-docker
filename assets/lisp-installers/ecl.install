@@ -14,7 +14,9 @@ curl "${_URL}" | tar xzf -
 
 cd /usr/local/src/ecl-${ECL_VERSION}
 
-./configure --prefix=/usr/local
-make -j2
+patch -p1 < /tmp/lisp-installers/patches/ecls-16.1.3-build.patch
+
+./configure --prefix=/usr/local --with-system-gmp --enable-longdouble=yes --with-dffi
+make -j1
 make install
 make clean
