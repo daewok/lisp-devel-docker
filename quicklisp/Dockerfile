@@ -69,6 +69,8 @@ RUN set -x \
     && export GNUPGHOME="$(mktemp -d)" \
     && gpg --import /tmp/quicklisp-release-key.txt \
     && gpg --verify /tmp/quicklisp.lisp.asc /tmp/quicklisp.lisp \
+    && sync \
+    && sleep 2 \
     && rm -r "$GNUPGHOME" /tmp/quicklisp.lisp.asc \
     && export HOME=/home/lisp \
     && sbcl --no-sysinit --no-userinit --non-interactive \
