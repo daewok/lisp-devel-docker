@@ -24,7 +24,7 @@ RUN set -ex; \
     gpg --keyserver pgp.mit.edu --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4; \
     gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu; \
     sync; \
-    slepp 2; \
+    sleep 2; \
     rm -r "$GNUPGHOME" /usr/local/bin/gosu.asc; \
     \
     chmod +x /usr/local/bin/gosu; \
