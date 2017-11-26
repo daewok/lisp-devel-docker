@@ -23,7 +23,7 @@ RUN echo "deb http://httpredir.debian.org/debian stretch-backports main" >> /etc
                 libenchant-dev libsdl2-dev libqt4-dev cmake libsmokeqt4-dev libnet-dev \
                 libsdl-ttf2.0-dev libczmq-dev libmpg123-dev libmagic-dev freetds-dev \
                 libfann-dev libglpk-dev libpapi-dev unixodbc-dev libpcap-dev \
-                r-base-dev libsane-dev swig libsnappy-dev graphviz \
+                r-base-dev libsane-dev swig libsnappy-dev graphviz gnuplot \
         || apt-get install --no-install-recommends -y \
                 libcairo2-dev libffi-dev \
                 libsdl1.2-dev libsdl-gfx1.2-dev libsdl-mixer1.2-dev libsdl-image1.2-dev \
@@ -44,7 +44,7 @@ RUN echo "deb http://httpredir.debian.org/debian stretch-backports main" >> /etc
                 libenchant-dev libsdl2-dev libqt4-dev cmake libsmokeqt4-dev libnet-dev \
                 libsdl-ttf2.0-dev libczmq-dev libmpg123-dev libmagic-dev freetds-dev \
                 libfann-dev libglpk-dev libpapi-dev unixodbc-dev libpcap-dev \
-                r-base-dev libsane-dev swig libsnappy-dev graphviz ) \
+                r-base-dev libsane-dev swig libsnappy-dev graphviz gnuplot ) \
     && apt-get clean \
     && rm -rf /var/lib/apt \
     && ln -s /usr/lib/libcsnd6.so /usr/lib/libcsnd.so \
