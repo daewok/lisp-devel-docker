@@ -25,7 +25,7 @@ RUN set -ex; \
     gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu; \
     sync; \
     sleep 2; \
-    rm -r "$GNUPGHOME" /usr/local/bin/gosu.asc; \
+    rm -rf "$GNUPGHOME" /usr/local/bin/gosu.asc; \
     \
     chmod +x /usr/local/bin/gosu; \
 # verify that the binary works
