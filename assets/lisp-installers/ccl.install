@@ -6,11 +6,11 @@ if [ -z "${CCL_VERSION}" ]; then
     exit 0
 fi
 
-_URL=ftp://ftp.clozure.com/pub/release/${CCL_VERSION}/ccl-${CCL_VERSION}-linuxx86.tar.gz
+_URL=https://github.com/Clozure/ccl/releases/download/v${CCL_VERSION}/ccl-${CCL_VERSION}-linuxx86.tar.gz
 
 cd /usr/local/src/
 
-curl "${_URL}" | tar xzf -
+curl -L "${_URL}" | tar xzf -
 
 cd /usr/local/src/ccl
 
