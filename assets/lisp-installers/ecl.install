@@ -10,7 +10,7 @@ _URL=https://common-lisp.net/project/ecl/static/files/release/ecl-${ECL_VERSION}
 
 cd /usr/local/src/
 
-curl "${_URL}" | tar xzf -
+curl -L "${_URL}" | tar xzf -
 
 cd /usr/local/src/ecl-${ECL_VERSION}
 

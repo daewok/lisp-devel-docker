@@ -10,7 +10,7 @@ _URL=http://abcl.org/releases/${ABCL_VERSION}/abcl-src-${ABCL_VERSION}.tar.gz
 
 cd /usr/local/src/
 
-curl "${_URL}" | tar xzf -
+curl -L "${_URL}" | tar xzf -
 
 cd /usr/local/src/abcl-src-${ABCL_VERSION}
 ant
