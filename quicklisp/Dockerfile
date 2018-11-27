@@ -67,8 +67,8 @@ RUN set -x \
     && curl "https://beta.quicklisp.org/quicklisp.lisp" > /tmp/quicklisp.lisp \
     && curl "https://beta.quicklisp.org/quicklisp.lisp.asc" > /tmp/quicklisp.lisp.asc \
     && export GNUPGHOME="$(mktemp -d)" \
-    && gpg --import /tmp/quicklisp-release-key.txt \
-    && gpg --verify /tmp/quicklisp.lisp.asc /tmp/quicklisp.lisp \
+    && gpg --batch --import /tmp/quicklisp-release-key.txt \
+    && gpg --batch --verify /tmp/quicklisp.lisp.asc /tmp/quicklisp.lisp \
     && sync \
     && sleep 2 \
     && rm -rf "$GNUPGHOME" /tmp/quicklisp.lisp.asc \
