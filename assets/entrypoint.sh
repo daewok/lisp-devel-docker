@@ -54,4 +54,4 @@ else
 fi
 export HOME="/home/lisp"
 
-exec /usr/local/bin/gosu lisp "$@"
+exec /usr/sbin/gosu lisp "$@"
