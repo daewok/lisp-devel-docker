@@ -36,7 +36,7 @@ new Quicklisp release comes out).
 This image is based off Debian Jessie. It contains only the bare necessities
 needed to run four Common Lisp implementations:
 
-+ SCBL
++ SBCL
 + CCL
 + ECL
 + ABCL
