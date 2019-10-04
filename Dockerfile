@@ -20,7 +20,7 @@ RUN set -x \
 
 COPY assets/lisp-installers /tmp/lisp-installers
 
-ENV SBCL_VERSION=1.5.3 CCL_VERSION=1.11.5 ECL_VERSION=16.1.3
+ENV SBCL_VERSION=1.5.7 CCL_VERSION=1.11.5 ECL_VERSION=16.1.3
 
 RUN chmod +x /tmp/lisp-installers/* \
     && sync \
