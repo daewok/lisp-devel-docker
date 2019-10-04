@@ -12,7 +12,7 @@ RUN set -ex; \
 RUN set -x \
     && apt-get update \
     && apt-get install -y --no-install-recommends ca-certificates \
-       build-essential \
+       build-essential netbase \
        openjdk-11-jre-headless \
     && apt-get purge -y --auto-remove wget \
     && rm -rf /var/lib/apt/lists/* \
