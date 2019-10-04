@@ -5,6 +5,6 @@ set -ex
 echo "Starting cleanup"
 
 # Cleanup build-time dependencies
-apt-get remove --purge -y openjdk-8-jdk time curl libz-dev m4 sbcl ant file
+apt-get remove --purge -y openjdk-11-jdk time curl libz-dev m4 sbcl ant file
 apt-get autoremove -y
 rm -rf /var/lib/apt
