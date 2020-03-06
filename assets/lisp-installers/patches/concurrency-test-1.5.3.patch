@@ -11,7 +11,7 @@ diff -r -U2 sbcl-1.5.3.orig/contrib/sb-concurrency/tests/test-frlock.lisp sbcl-1
 @@ -89,5 +89,5 @@
  (deftest* (frlock.1)
      (handler-case
--        (sb-ext:with-timeout 20
+-        (sb-ext:with-timeout 40
 +        (sb-ext:with-timeout 240
            (test-frlocks #+win32 :outer-write-pause #+win32 t ))
        (sb-ext:timeout (c)
