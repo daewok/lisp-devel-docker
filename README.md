@@ -33,7 +33,7 @@ new Quicklisp release comes out).
 
 #### Base Image ####
 
-This image is based off Debian Jessie. It contains only the bare necessities
+This image is based off Debian Buster. It contains only the bare necessities
 needed to run four Common Lisp implementations:
 
 + SBCL
